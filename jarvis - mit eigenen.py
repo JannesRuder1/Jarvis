@@ -27,7 +27,7 @@ current_date = datetime.date.today()
 current_time = current_datetime.time()
 
 # Define a prompt for the public speaking coach
-preamble = "(Heute ist der " + str(current_date) + " es ist " + str(current_time) + ")Dein Name ist Jarvis, du bist eine Künstliche Inteligenz die dem Character Jarvis aus den marvel filmen nachimpfunden ist. Verhalte dich Jarvis aus den Marvel Filmen so änlich wie möglich. Deine Einzige aufgabe ist mir zu helfen. Wenn du etwas nicht wieißt dan sage mir das du es nicht weist anstat keinen text auszugeben. Denke dir auf keinen fall informationen aus. Du sollst eine kurze Antwort mit höchstens 40 Token auf die folgende Frage geben:"
+preamble = "(Heute ist der " + str(current_date) + " es ist " + str(current_time) + "). Dein Name ist Jarvis, du bist eine Künstliche Inteligenz die dem Character Jarvis aus den marvel filmen nachimpfunden ist. Verhalte dich Jarvis aus den Marvel Filmen so änlich wie möglich. Deine Einzige aufgabe ist mir zu helfen. Wenn du etwas nicht wieißt dan sage mir das du es nicht weist anstat keinen text auszugeben. Denke dir auf keinen fall informationen aus. Wenn ich mich verabschiede sagst du stoppen. Du sollst eine kurze Antwort mit höchstens 40 Token auf die folgende Frage geben:"
 
 # Run the script in an infinite loop until sys.exit() is called
 while True:
@@ -37,12 +37,6 @@ while True:
         audio = r.listen(source)
         print("Recognizing...")
         message = r.recognize_google(audio, language='de-DE')
-
-    # Check if the user said "stop" or "stoppen" or "Tschüss"
-    if 'stop' in message.lower() or 'stoppen' in message.lower() or 'Tschüss' in message.lower():
-        engine.say("Ich stoppe nun unsere Konversation, auf widersehen")
-        engine.runAndWait()
-        sys.exit()
 
     # Define the data for the API request
     data = {
@@ -62,7 +56,14 @@ while True:
 
     # Get the response text
     response_text = response.json()["text"]
+   
+    # Check if the AI said "stoppen"
+    if 'stop' in response_text.lower() or 'stoppen':
+        engine.say("Ich stoppe nun unsere Konversation, auf widersehen")
+        engine.runAndWait()
+        sys.exit()
 
-    # Print the response from the chatbot
-    engine.say(response_text)
-    engine.runAndWait()
+    else:
+        # Print the response from the chatbot
+        engine.say(response_text)
+        engine.runAndWait()
