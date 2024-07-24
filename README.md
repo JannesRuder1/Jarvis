@@ -1,1 +1,1 @@
-Dieser Code Ermöglicht ein eigenen jarvis, welcher durch die extra datei auch einen chatverlauf zusammenfast um informationen aus vorherigen onversationen schneller zu finden.
+Dieser Code Ermöglicht ein eigenen jarvis, welcher durch die extra datei auch einen chatverlauf zusammenfast um informationen aus vorherigen conversationen schneller zu finden. die datei welche nicht mit "extra" gekentzeichnet wurde ist das jarvis model welches die konversationen ermöglicht, mit hilfe von Cohere AI
